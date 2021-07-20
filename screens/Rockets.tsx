@@ -15,6 +15,7 @@ export interface IRocket {
   type: string;
   active: boolean;
   wikipedia: string;
+  description: string;
   children?: React.ReactNode;
 }
 
@@ -44,6 +45,7 @@ const Rockets = () => {
             type={item.type}
             active={item.active}
             wikipedia={item.wikipedia}
+            description={item.description}
           />
         )}
       />

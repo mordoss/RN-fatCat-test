@@ -1,5 +1,7 @@
 import styled from 'styled-components/native';
 
+import { dark } from './colors';
+
 const RocketCard = styled.View`
   margin-top: auto;
   margin-bottom: auto;
@@ -9,8 +11,8 @@ const RocketCard = styled.View`
 `;
 
 const RocketCardInfo = styled.View`
-  background-color: white;
   margin-top: -24px;
+  background-color: ${dark.gray};
   padding: 24px;
   align-items: stretch;
   border-radius: 20px;
@@ -26,15 +28,15 @@ const CardItem = styled.View`
   justify-content: space-between;
   margin-top: 24px;
   padding-bottom: 8px;
-  border-bottom-color: gray;
-  border-bottom-width: 1px;
 `;
 
 const ButtonLink = styled.Pressable`
-  background-color: hotpink;
   padding: 8px;
   margin-top: 24px;
   border-radius: 10px;
+  border-color: ${dark.primaryLight};
+  border-width: 1px;
+  background-color: ${dark.grayLight};
 `;
 
 export { RocketCard, MembersCard, RocketCardInfo, CardItem, ButtonLink };

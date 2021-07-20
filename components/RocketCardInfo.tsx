@@ -1,11 +1,11 @@
 import React from 'react';
 import { Linking } from 'react-native';
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { FontAwesome5 } from '@expo/vector-icons';
+import { FontAwesome5, MaterialIcons } from '@expo/vector-icons';
 
-import { Row } from '../styled/layout';
+import Description from './Description';
 import {
-  RocketCard as RocketCardContainer,
+  RocketCardInfo as RocketCardInfoContainer,
   CardItem,
   ButtonLink,
 } from '../styled/cards';
@@ -14,7 +14,9 @@ import {
   SmallNormal,
   SmallBold,
   MediumNormal,
+  MediumItalic,
 } from '../styled/typography';
+import { dark } from '../styled/colors';
 
 interface IProps {
   name: string;
@@ -25,6 +27,7 @@ interface IProps {
   active: boolean;
   wikipedia: string;
   width: number;
+  description: string;
 }
 
 const RocketCardInfo: React.FC<IProps> = ({
@@ -36,22 +39,27 @@ const RocketCardInfo: React.FC<IProps> = ({
   active,
   wikipedia,
   width,
+  description,
 }) => (
-  <RocketCardContainer
+  <RocketCardInfoContainer
     style={{
-      width: 0.8 * width,
+      width: 0.9 * width,
     }}
   >
     <MediumBold>{name}</MediumBold>
-    <Row>
-      <MediumNormal>{type}</MediumNormal>
-      <MediumNormal>{active ? 'active' : 'inactive'}</MediumNormal>
-    </Row>
+    <MaterialIcons
+      name={`airplanemode-${active ? 'active' : 'inactive'}`}
+      size={24}
+      color={active ? dark.primaryLight : dark.light}
+      style={{ marginLeft: 'auto', marginRight: 'auto' }}
+    />
+    <MediumItalic>{type}</MediumItalic>
+
     <CardItem>
       <FontAwesome5
         name="weight-hanging"
         size={24}
-        color="grey"
+        color={dark.primaryLight}
         style={{ width: 36 }}
       />
       <SmallNormal>Weight:</SmallNormal>
@@ -62,7 +70,7 @@ const RocketCardInfo: React.FC<IProps> = ({
       <FontAwesome5
         name="ruler-vertical"
         size={24}
-        color="grey"
+        color={dark.primaryLight}
         style={{ width: 36 }}
       />
       <SmallNormal>Height:</SmallNormal>
@@ -73,21 +81,22 @@ const RocketCardInfo: React.FC<IProps> = ({
       <FontAwesome5
         name="ruler-horizontal"
         size={24}
-        color="grey"
+        color={dark.primaryLight}
         style={{ width: 36 }}
       />
       <SmallNormal>Diameter:</SmallNormal>
       <SmallBold>{diameter.meters} m</SmallBold>
     </CardItem>
+    <Description description={description} />
     <ButtonLink
       title="More info"
       onPress={() => {
         Linking.openURL(wikipedia);
       }}
     >
-      <MediumNormal>More Info</MediumNormal>
+      <MediumNormal>More Info on Wiki</MediumNormal>
     </ButtonLink>
-  </RocketCardContainer>
+  </RocketCardInfoContainer>
 );
 
 export default RocketCardInfo;

@@ -17,6 +17,7 @@ const Rocket: React.FC<IRocket> = ({
   type,
   active,
   wikipedia,
+  description,
 }) => {
   const [imageZoomed, setImageZoomed] = useState(false);
 
@@ -40,6 +41,7 @@ const Rocket: React.FC<IRocket> = ({
         active={active}
         wikipedia={wikipedia}
         width={width}
+        description={description}
       />
     </RocketCard>
   );
