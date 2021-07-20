@@ -1,33 +1,49 @@
-import React from 'react';
-import { View, Button } from 'react-native';
+import React, { useEffect, useState } from 'react';
+
 import {
   createStackNavigator,
   StackNavigationProp,
 } from '@react-navigation/stack';
+import useFetch from '../hooks/useFetch';
 
-import CrewMember from './CrewMember';
+import CrewMemberScreen from './CrewMember';
+import Member from '../components/Member';
+import { CrewMembersContainer } from '../styled/layout';
+import { CREW as url } from '../APIs';
 
-const MembersStack = createStackNavigator();
-
-type IProps = {
+export type IProps = {
   navigation: StackNavigationProp<any, any>;
 };
 
-const CrewMembersComponent: React.FC<IProps> = ({ navigation }) => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Button
-      title="Go to Member"
-      onPress={() => navigation.navigate('Crew Member', { name: 15465 })}
-    />
-  </View>
-);
+export interface IMember {
+  id?: string;
+  name: string;
+}
+
+const CrewMembersComponent: React.FC<IProps> = ({ navigation }) => {
+  const { status, data, error } = useFetch<IMember[]>(url);
+  const [crewMembers, setCrewMembers] = useState<IMember[]>();
+
+  useEffect(() => {
+    setCrewMembers(data);
+  }, [data]);
+
+  const renderCrewMembers = () =>
+    crewMembers?.map((member) => (
+      <Member key={member.id} name={member.name} navigation={navigation} />
+    ));
+
+  return <CrewMembersContainer>{renderCrewMembers()}</CrewMembersContainer>;
+};
+
+const MembersStack = createStackNavigator();
 
 const CrewMembers = () => (
   <MembersStack.Navigator>
     <MembersStack.Screen name="Crew Members" component={CrewMembersComponent} />
     <MembersStack.Screen
       name="Crew Member"
-      component={CrewMember}
+      component={CrewMemberScreen}
       options={({ route }) => ({
         title: route.params.name,
       })}
