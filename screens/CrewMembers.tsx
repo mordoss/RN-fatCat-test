@@ -1,12 +1,19 @@
 import React from 'react';
 import { View, Button } from 'react-native';
-import { createStackNavigator } from '@react-navigation/stack';
+import {
+  createStackNavigator,
+  StackNavigationProp,
+} from '@react-navigation/stack';
 
 import CrewMember from './CrewMember';
 
 const MembersStack = createStackNavigator();
 
-const CrewMembersComponent = ({ navigation }) => (
+type IProps = {
+  navigation: StackNavigationProp<any, any>;
+};
+
+const CrewMembersComponent: React.FC<IProps> = ({ navigation }) => (
   <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
     <Button
       title="Go to Member"
@@ -21,7 +28,9 @@ const CrewMembers = () => (
     <MembersStack.Screen
       name="Crew Member"
       component={CrewMember}
-      options={({ route }) => ({ title: route.params.name })}
+      options={({ route }) => ({
+        title: route.params.name,
+      })}
     />
   </MembersStack.Navigator>
 );
