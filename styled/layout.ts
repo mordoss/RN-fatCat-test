@@ -7,6 +7,8 @@ const RocketsContainer = styled.View`
   background-color: ${dark.grayLight};
 `;
 
-const CrewMembersContainer = styled.ScrollView``;
+const CrewMembersContainer = styled.ScrollView`
+  background-color: ${dark.grayLight};
+`;
 
 export { RocketsContainer, CrewMembersContainer };

@@ -14,10 +14,7 @@ const Description = ({ description }: { description: string }) => {
       <SmallNormal style={{ marginTop: 16, marginBottom: 16 }}>
         {regulateText(description)}
       </SmallNormal>
-      <SmallBold
-        onPress={() => setMore(!more)}
-        style={{ color: dark.primaryLight }}
-      >
+      <SmallBold onPress={() => setMore(!more)} style={{ color: dark.primary }}>
         {more ? 'Show less' : 'Show more'}
       </SmallBold>
     </>

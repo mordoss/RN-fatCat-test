@@ -14,16 +14,16 @@ const App = () => (
       tabBarOptions={{
         activeTintColor: dark.primaryLight,
         inactiveTintColor: dark.light,
-        activeBackgroundColor: dark.gray,
-        inactiveBackgroundColor: dark.gray,
+        activeBackgroundColor: dark.darkBlue,
+        inactiveBackgroundColor: dark.darkBlue,
         labelStyle: {
           fontSize: 20,
           marginBottom: 8,
         },
       }}
     >
-      <Tab.Screen name="Rockets" component={Rockets} />
       <Tab.Screen name="Crew Members" component={CrewMembers} />
+      <Tab.Screen name="Rockets" component={Rockets} />
     </Tab.Navigator>
   </NavigationContainer>
 );

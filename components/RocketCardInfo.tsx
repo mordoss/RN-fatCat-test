@@ -50,7 +50,7 @@ const RocketCardInfo: React.FC<IProps> = ({
     <MaterialIcons
       name={`airplanemode-${active ? 'active' : 'inactive'}`}
       size={24}
-      color={active ? dark.primaryLight : dark.light}
+      color={active ? dark.primary : dark.light}
       style={{ marginLeft: 'auto', marginRight: 'auto' }}
     />
     <MediumItalic>{type}</MediumItalic>
@@ -59,7 +59,7 @@ const RocketCardInfo: React.FC<IProps> = ({
       <FontAwesome5
         name="weight-hanging"
         size={24}
-        color={dark.primaryLight}
+        color={dark.primary}
         style={{ width: 36 }}
       />
       <SmallNormal>Weight:</SmallNormal>
@@ -70,7 +70,7 @@ const RocketCardInfo: React.FC<IProps> = ({
       <FontAwesome5
         name="ruler-vertical"
         size={24}
-        color={dark.primaryLight}
+        color={dark.primary}
         style={{ width: 36 }}
       />
       <SmallNormal>Height:</SmallNormal>
@@ -81,7 +81,7 @@ const RocketCardInfo: React.FC<IProps> = ({
       <FontAwesome5
         name="ruler-horizontal"
         size={24}
-        color={dark.primaryLight}
+        color={dark.primary}
         style={{ width: 36 }}
       />
       <SmallNormal>Diameter:</SmallNormal>

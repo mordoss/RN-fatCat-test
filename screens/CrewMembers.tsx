@@ -4,12 +4,13 @@ import {
   createStackNavigator,
   StackNavigationProp,
 } from '@react-navigation/stack';
-import useFetch from '../hooks/useFetch';
 
+import useFetch from '../hooks/useFetch';
 import CrewMemberScreen from './CrewMember';
 import Member from '../components/Member';
 import { CrewMembersContainer } from '../styled/layout';
 import { CREW as url } from '../APIs';
+import { dark } from '../styled/colors';
 
 export type IProps = {
   navigation: StackNavigationProp<any, any>;
@@ -18,6 +19,8 @@ export type IProps = {
 export interface IMember {
   id?: string;
   name: string;
+  image: string;
+  agency: string;
 }
 
 const CrewMembersComponent: React.FC<IProps> = ({ navigation }) => {
@@ -30,7 +33,13 @@ const CrewMembersComponent: React.FC<IProps> = ({ navigation }) => {
 
   const renderCrewMembers = () =>
     crewMembers?.map((member) => (
-      <Member key={member.id} name={member.name} navigation={navigation} />
+      <Member
+        key={member.id}
+        name={member.name}
+        navigation={navigation}
+        image={member.image}
+        agency={member.agency}
+      />
     ));
 
   return <CrewMembersContainer>{renderCrewMembers()}</CrewMembersContainer>;
@@ -39,7 +48,14 @@ const CrewMembersComponent: React.FC<IProps> = ({ navigation }) => {
 const MembersStack = createStackNavigator();
 
 const CrewMembers = () => (
-  <MembersStack.Navigator>
+  <MembersStack.Navigator
+    screenOptions={{
+      headerStyle: {
+        backgroundColor: dark.darkBlue,
+      },
+      headerTintColor: dark.light,
+    }}
+  >
     <MembersStack.Screen name="Crew Members" component={CrewMembersComponent} />
     <MembersStack.Screen
       name="Crew Member"

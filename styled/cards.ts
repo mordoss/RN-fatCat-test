@@ -12,14 +12,20 @@ const RocketCard = styled.View`
 
 const RocketCardInfo = styled.View`
   margin-top: -24px;
-  background-color: ${dark.gray};
+  background-color: ${dark.darkBlue};
   padding: 24px;
   align-items: stretch;
   border-radius: 20px;
 `;
 
 const MembersCard = styled.View`
-  border: 1px solid black;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  background-color: ${dark.dark};
+  margin: 16px;
+  padding: 8px;
+  border-radius: 8px;
 `;
 
 const CardItem = styled.View`
@@ -34,7 +40,7 @@ const ButtonLink = styled.Pressable`
   padding: 8px;
   margin-top: 24px;
   border-radius: 10px;
-  border-color: ${dark.primaryLight};
+  border-color: ${dark.primary};
   border-width: 1px;
   background-color: ${dark.grayLight};
 `;
