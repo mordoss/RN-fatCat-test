@@ -33,6 +33,7 @@ const CrewMember = ({ route }) => {
     setMember(route.params);
   }, [route.params]);
 
+  // menaging permissions referring to task
   useEffect(() => {
     (async () => {
       const { status: cameraStatus } = await Camera.requestPermissionsAsync();
@@ -58,7 +59,6 @@ const CrewMember = ({ route }) => {
             width: 0.6 * width,
             borderRadius: 0.3 * width,
             margin: 4,
-            overflow: 'hidden',
           }}
         />
       </ImageWrapper>

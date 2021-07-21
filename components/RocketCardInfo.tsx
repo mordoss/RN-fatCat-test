@@ -89,7 +89,6 @@ const RocketCardInfo: React.FC<IProps> = ({
     </CardItem>
     <Description description={description} />
     <ButtonLink
-      title="More info"
       onPress={() => {
         Linking.openURL(wikipedia);
       }}
