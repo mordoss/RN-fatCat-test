@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Dimensions, Image, Linking } from 'react-native';
 import { Camera } from 'expo-camera';
+import * as ImagePicker from 'expo-image-picker';
 
 import { CrewMemberContainer } from '../styled/layout';
 import {
@@ -26,6 +27,7 @@ interface IMember {
 const CrewMember = ({ route }) => {
   const [member, setMember] = useState<IMember>();
   const [hasCameraPermission, setHasCameraPermission] = useState(false);
+  const [hasGalleryPermission, setHasGalleryPermission] = useState(false);
 
   useEffect(() => {
     setMember(route.params);
@@ -33,8 +35,12 @@ const CrewMember = ({ route }) => {
 
   useEffect(() => {
     (async () => {
-      const { status } = await Camera.requestPermissionsAsync();
-      setHasCameraPermission(status === 'granted');
+      const { status: cameraStatus } = await Camera.requestPermissionsAsync();
+      const { status: galleryStatus } =
+        await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+      setHasCameraPermission(cameraStatus === 'granted');
+      setHasGalleryPermission(galleryStatus === 'granted');
     })();
   }, []);
 
@@ -43,7 +49,7 @@ const CrewMember = ({ route }) => {
       <ImageWrapper imageWidth={0.6 * width}>
         <Image
           source={
-            hasCameraPermission
+            hasCameraPermission && hasGalleryPermission
               ? { uri: member.image }
               : require('../assets/silhouette.png')
           }
@@ -56,7 +62,7 @@ const CrewMember = ({ route }) => {
           }}
         />
       </ImageWrapper>
-      {hasCameraPermission ? (
+      {hasCameraPermission && hasGalleryPermission ? (
         <MemberCardInfo
           style={{
             width: 0.8 * width,
