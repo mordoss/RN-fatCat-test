@@ -5,6 +5,7 @@ import { dark } from './colors';
 const RocketsContainer = styled.ScrollView`
   flex: 1;
   background-color: ${dark.grayLight};
+  padding-top: 36px;
 `;
 
 const CrewMembersContainer = styled.ScrollView`

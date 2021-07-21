@@ -20,14 +20,15 @@ import { dark } from '../styled/colors';
 
 interface IProps {
   name: string;
-  mass: { kg: number };
-  height: { meters: number };
-  diameter: { meters: number };
+  mass: { kg: number; lb: number };
+  height: { meters: number; feet: number };
+  diameter: { meters: number; feet: number };
   type: string;
   active: boolean;
   wikipedia: string;
   width: number;
   description: string;
+  imperial: boolean;
 }
 
 const RocketCardInfo: React.FC<IProps> = ({
@@ -40,6 +41,7 @@ const RocketCardInfo: React.FC<IProps> = ({
   wikipedia,
   width,
   description,
+  imperial,
 }) => (
   <RocketCardInfoContainer
     style={{
@@ -63,7 +65,7 @@ const RocketCardInfo: React.FC<IProps> = ({
         style={{ width: 36 }}
       />
       <SmallNormal>Weight:</SmallNormal>
-      <SmallBold>{mass.kg} kg</SmallBold>
+      <SmallBold>{imperial ? `${mass.lb} lb` : `${mass.kg} kg`}</SmallBold>
     </CardItem>
 
     <CardItem>
@@ -74,7 +76,9 @@ const RocketCardInfo: React.FC<IProps> = ({
         style={{ width: 36 }}
       />
       <SmallNormal>Height:</SmallNormal>
-      <SmallBold>{height.meters} m</SmallBold>
+      <SmallBold>
+        {imperial ? `${height.feet} feet` : `${height.meters} m`}
+      </SmallBold>
     </CardItem>
 
     <CardItem>
@@ -85,7 +89,9 @@ const RocketCardInfo: React.FC<IProps> = ({
         style={{ width: 36 }}
       />
       <SmallNormal>Diameter:</SmallNormal>
-      <SmallBold>{diameter.meters} m</SmallBold>
+      <SmallBold>
+        {imperial ? `${diameter.feet} feet` : `${diameter.meters} m`}
+      </SmallBold>
     </CardItem>
     <Description description={description} />
     <ButtonLink

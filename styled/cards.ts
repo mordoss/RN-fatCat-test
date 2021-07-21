@@ -3,8 +3,7 @@ import styled from 'styled-components/native';
 import { dark } from './colors';
 
 const RocketCard = styled.View`
-  margin-top: auto;
-  margin-bottom: auto;
+  margin: 18px 0;
   border-radius: 20px;
   overflow: hidden;
   align-items: center;

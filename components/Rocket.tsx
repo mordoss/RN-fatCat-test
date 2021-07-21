@@ -5,9 +5,13 @@ import RocketCardInfo from './RocketCardInfo';
 import { RocketCard } from '../styled/cards';
 import { IRocket } from '../screens/Rockets';
 
+interface IProps extends IRocket {
+  imperial: boolean;
+}
+
 const { width } = Dimensions.get('window');
 
-const Rocket: React.FC<IRocket> = ({
+const Rocket: React.FC<IProps> = ({
   // eslint-disable-next-line camelcase
   flickr_images,
   name,
@@ -18,6 +22,7 @@ const Rocket: React.FC<IRocket> = ({
   active,
   wikipedia,
   description,
+  imperial,
 }) => {
   const [imageZoomed, setImageZoomed] = useState(false);
 
@@ -33,6 +38,7 @@ const Rocket: React.FC<IRocket> = ({
         />
       </TouchableOpacity>
       <RocketCardInfo
+        imperial={imperial}
         name={name}
         mass={mass}
         height={height}
