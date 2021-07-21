@@ -18,4 +18,14 @@ const CrewMemberContainer = styled.View`
   justify-content: space-evenly;
 `;
 
-export { RocketsContainer, CrewMembersContainer, CrewMemberContainer };
+const Input = styled.TextInput`
+  font-size: 24px;
+  margin: 16px;
+  margin-top: 36px;
+  background-color: ${dark.light};
+  height: 36px;
+  padding: 4px;
+  border-radius: 4px;
+`;
+
+export { RocketsContainer, CrewMembersContainer, CrewMemberContainer, Input };

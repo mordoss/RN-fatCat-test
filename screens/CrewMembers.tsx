@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { TextInput } from 'react-native';
 import {
   createStackNavigator,
   StackNavigationProp,
@@ -9,7 +8,7 @@ import useFetch from '../hooks/useFetch';
 import CrewMemberScreen from './CrewMember';
 import ErrorModal from '../components/ErrorModal';
 import Member from '../components/Member';
-import { CrewMembersContainer } from '../styled/layout';
+import { CrewMembersContainer, Input } from '../styled/layout';
 import { CREW as url } from '../APIs';
 import { dark } from '../styled/colors';
 
@@ -38,21 +37,32 @@ const CrewMembersComponent: React.FC<IProps> = ({ navigation }) => {
   }, [data, status]);
 
   const renderCrewMembers = () =>
-    crewMembers?.map((member) => (
-      <Member
-        key={member.id}
-        name={member.name}
-        navigation={navigation}
-        image={member.image}
-        agency={member.agency}
-        wikipedia={member.wikipedia}
-        status={member.status}
-      />
-    ));
+    crewMembers
+      ?.filter((member) =>
+        `${member.name} ${member.agency}`
+          .toLowerCase()
+          .includes(search.toLowerCase())
+      )
+      .map((member) => (
+        <Member
+          key={member.id}
+          name={member.name}
+          navigation={navigation}
+          image={member.image}
+          agency={member.agency}
+          wikipedia={member.wikipedia}
+          status={member.status}
+        />
+      ));
 
   return (
     <CrewMembersContainer>
-      <TextInput onChangeText={(text) => setSearch(text)} value={search} />
+      <Input
+        onChangeText={(text: string) => setSearch(text)}
+        value={search}
+        autoFocus
+        placeholder="Search Name or Agency"
+      />
       {renderCrewMembers()}
       <ErrorModal
         modalVisible={apiInvalid}
