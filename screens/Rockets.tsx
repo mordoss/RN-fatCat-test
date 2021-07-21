@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { FlatList } from 'react-native';
+
+import ErrorModal from '../components/ErrorModal';
 import useFetch from '../hooks/useFetch';
 import Rocket from '../components/Rocket';
 import { RocketsContainer } from '../styled/layout';
@@ -20,15 +22,22 @@ export interface IRocket {
 }
 
 const Rockets = () => {
-  const { status, data, error } = useFetch<IRocket[]>(url);
+  const { status, data } = useFetch<IRocket[]>(url);
   const [rockets, setRockets] = useState<IRocket[]>();
+  const [apiInvalid, setApiInvalid] = useState(true);
 
   useEffect(() => {
+    setApiInvalid(status === 'error');
     setRockets(data);
-  }, [data]);
+  }, [data, status]);
 
   return (
     <RocketsContainer>
+      <ErrorModal
+        modalVisible={apiInvalid}
+        message="API"
+        cancel={setApiInvalid}
+      />
       <FlatList
         data={rockets}
         keyExtractor={(rocket) => rocket.id.toString()}

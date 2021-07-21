@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-
+import { TextInput } from 'react-native';
 import {
   createStackNavigator,
   StackNavigationProp,
@@ -7,6 +7,7 @@ import {
 
 import useFetch from '../hooks/useFetch';
 import CrewMemberScreen from './CrewMember';
+import ErrorModal from '../components/ErrorModal';
 import Member from '../components/Member';
 import { CrewMembersContainer } from '../styled/layout';
 import { CREW as url } from '../APIs';
@@ -26,12 +27,15 @@ export interface IMember {
 }
 
 const CrewMembersComponent: React.FC<IProps> = ({ navigation }) => {
-  const { status, data, error } = useFetch<IMember[]>(url);
+  const { status, data } = useFetch<IMember[]>(url);
   const [crewMembers, setCrewMembers] = useState<IMember[]>();
+  const [apiInvalid, setApiInvalid] = useState(true);
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
+    setApiInvalid(status === 'error');
     setCrewMembers(data);
-  }, [data]);
+  }, [data, status]);
 
   const renderCrewMembers = () =>
     crewMembers?.map((member) => (
@@ -46,7 +50,17 @@ const CrewMembersComponent: React.FC<IProps> = ({ navigation }) => {
       />
     ));
 
-  return <CrewMembersContainer>{renderCrewMembers()}</CrewMembersContainer>;
+  return (
+    <CrewMembersContainer>
+      <TextInput onChangeText={(text) => setSearch(text)} value={search} />
+      {renderCrewMembers()}
+      <ErrorModal
+        modalVisible={apiInvalid}
+        message="API"
+        cancel={setApiInvalid}
+      />
+    </CrewMembersContainer>
+  );
 };
 
 const MembersStack = createStackNavigator();

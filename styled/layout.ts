@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 
 import { dark } from './colors';
 
-const RocketsContainer = styled.View`
+const RocketsContainer = styled.ScrollView`
   flex: 1;
   background-color: ${dark.grayLight};
 `;

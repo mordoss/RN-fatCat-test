@@ -1,6 +1,8 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable global-require */
 import React from 'react';
 import { Modal } from 'react-native';
+import { FontAwesome5 } from '@expo/vector-icons';
 
 import { ModalWrapper, ModalContainer } from '../styled/modal';
 import { ButtonLink } from '../styled/cards';
@@ -17,6 +19,12 @@ const ErrorModal: React.FC<IProps> = ({ modalVisible, cancel, message }) =>
     <Modal animationType="slide" transparent visible={modalVisible}>
       <ModalWrapper>
         <ModalContainer>
+          <FontAwesome5
+            name="rocket"
+            size={36}
+            color="white"
+            style={{ marginBottom: 16 }}
+          />
           <SmallNormal>
             Houston, we have a problem {message} crashed!!!
           </SmallNormal>
