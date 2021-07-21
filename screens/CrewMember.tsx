@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 import React, { useState, useEffect } from 'react';
 import { Dimensions, Image, Linking } from 'react-native';
 import { Camera } from 'expo-camera';
@@ -24,53 +25,70 @@ interface IMember {
 // TODO check type for navigation route in docs & merge /w props
 const CrewMember = ({ route }) => {
   const [member, setMember] = useState<IMember>();
+  const [hasCameraPermission, setHasCameraPermission] = useState(false);
 
   useEffect(() => {
     setMember(route.params);
   }, [route.params]);
 
+  useEffect(() => {
+    (async () => {
+      const { status } = await Camera.requestPermissionsAsync();
+      setHasCameraPermission(status === 'granted');
+    })();
+  }, []);
+
   return member ? (
     <CrewMemberContainer>
       <ImageWrapper imageWidth={0.6 * width}>
         <Image
-          source={{ uri: member.image }}
+          source={
+            hasCameraPermission
+              ? { uri: member.image }
+              : require('../assets/silhouette.png')
+          }
           style={{
             height: 0.6 * width,
             width: 0.6 * width,
             borderRadius: 0.3 * width,
             margin: 4,
+            overflow: 'hidden',
           }}
         />
       </ImageWrapper>
-      <MemberCardInfo
-        style={{
-          width: 0.8 * width,
-        }}
-      >
-        <CardItem>
-          <SmallNormal>Name:</SmallNormal>
-          <SmallBold>{member.name}</SmallBold>
-        </CardItem>
-
-        <CardItem>
-          <SmallNormal>Agency:</SmallNormal>
-          <SmallBold>{member.agency}</SmallBold>
-        </CardItem>
-
-        <CardItem>
-          <SmallNormal>Status:</SmallNormal>
-          <SmallBold>{member.status}</SmallBold>
-        </CardItem>
-
-        <ButtonLink
-          title="More info"
-          onPress={() => {
-            Linking.openURL(member.wikipedia);
+      {hasCameraPermission ? (
+        <MemberCardInfo
+          style={{
+            width: 0.8 * width,
           }}
         >
-          <MediumNormal>More Info on Wiki</MediumNormal>
-        </ButtonLink>
-      </MemberCardInfo>
+          <CardItem>
+            <SmallNormal>Name:</SmallNormal>
+            <SmallBold>{member.name}</SmallBold>
+          </CardItem>
+
+          <CardItem>
+            <SmallNormal>Agency:</SmallNormal>
+            <SmallBold>{member.agency}</SmallBold>
+          </CardItem>
+
+          <CardItem>
+            <SmallNormal>Status:</SmallNormal>
+            <SmallBold>{member.status}</SmallBold>
+          </CardItem>
+
+          <ButtonLink
+            title="More info"
+            onPress={() => {
+              Linking.openURL(member.wikipedia);
+            }}
+          >
+            <MediumNormal>More Info on Wiki</MediumNormal>
+          </ButtonLink>
+        </MemberCardInfo>
+      ) : (
+        <MediumNormal>You have no permission to view this</MediumNormal>
+      )}
     </CrewMemberContainer>
   ) : (
     <MediumNormal>Loading...</MediumNormal>
