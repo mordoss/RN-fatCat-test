@@ -12,7 +12,7 @@ The app serves a purpose as a test.
 
 ## Extra Features
 
-- Swipe through rockets in Rockets screen.
+- Swipe through rockets in Rockets Screen.
 - Zoom rocket image on touch.
 - Switch between imperial and metric units.
 - Rendering astronaut silhouette when permissions are denied.
