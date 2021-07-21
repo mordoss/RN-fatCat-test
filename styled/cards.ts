@@ -18,13 +18,20 @@ const RocketCardInfo = styled.View`
   border-radius: 20px;
 `;
 
+const MemberCardInfo = styled.View`
+  background-color: ${dark.darkBlue};
+  padding: 24px;
+  align-items: stretch;
+  border-radius: 20px;
+`;
+
 const MembersCard = styled.View`
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
   background-color: ${dark.dark};
   margin: 16px;
-  padding: 8px;
+  padding: 12px 6px;
   border-radius: 8px;
 `;
 
@@ -34,6 +41,8 @@ const CardItem = styled.View`
   justify-content: space-between;
   margin-top: 24px;
   padding-bottom: 8px;
+  border-bottom-color: ${dark.secondary};
+  border-bottom-width: 1px;
 `;
 
 const ButtonLink = styled.Pressable`
@@ -45,4 +54,18 @@ const ButtonLink = styled.Pressable`
   background-color: ${dark.grayLight};
 `;
 
-export { RocketCard, MembersCard, RocketCardInfo, CardItem, ButtonLink };
+const ImageWrapper = styled.View`
+  border-radius: ${(props: { imageWidth: number }) => props.imageWidth / 2}px;
+  border-width: 4px;
+  border-color: ${dark.primary};
+`;
+
+export {
+  RocketCard,
+  MembersCard,
+  RocketCardInfo,
+  CardItem,
+  ButtonLink,
+  ImageWrapper,
+  MemberCardInfo,
+};

@@ -21,6 +21,8 @@ export interface IMember {
   name: string;
   image: string;
   agency: string;
+  wikipedia: string;
+  status: string;
 }
 
 const CrewMembersComponent: React.FC<IProps> = ({ navigation }) => {
@@ -39,6 +41,8 @@ const CrewMembersComponent: React.FC<IProps> = ({ navigation }) => {
         navigation={navigation}
         image={member.image}
         agency={member.agency}
+        wikipedia={member.wikipedia}
+        status={member.status}
       />
     ));
 

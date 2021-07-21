@@ -11,4 +11,11 @@ const CrewMembersContainer = styled.ScrollView`
   background-color: ${dark.grayLight};
 `;
 
-export { RocketsContainer, CrewMembersContainer };
+const CrewMemberContainer = styled.View`
+  flex: 1;
+  background-color: ${dark.grayLight};
+  align-items: center;
+  justify-content: space-evenly;
+`;
+
+export { RocketsContainer, CrewMembersContainer, CrewMemberContainer };
