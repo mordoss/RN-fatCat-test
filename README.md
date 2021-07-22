@@ -17,5 +17,6 @@ The app serves a purpose as a test.
 - Switch between imperial and metric units.
 - Rendering astronaut silhouette when permissions are denied.
 - Search astronauts based on name or agency.
+- Show more/less functionality
 
 ![preview](preview.gif)
